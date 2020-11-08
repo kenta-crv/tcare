@@ -1,8 +1,9 @@
 class ListsController < ApplicationController
+  #before_action :authenticate_worker!, only: [:new, :edit]
   def index
     @q = List.ransack(params[:q])
     @lists = @q.result
-    @lists = @lists.page(params[:page]).per(20).order(created_at: :desc)
+    @lists = @lists.page(params[:page]).per(30).order(created_at: :desc)
     respond_to do |format|
      format.html
      format.csv{ send_data @lists.generate_csv, filename: "lists-#{Time.zone.now.strftime('%Y%m%d%S')}.csv" }
@@ -11,6 +12,10 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
+    @q = List.ransack(params[:q])
+    @lists = @q.result
+    @prev_list = @lists.where("lists.id > ?", @list.id).first
+    @next_list = @lists.where("lists.id < ?", @list.id).last
   end
 
   def new
@@ -33,7 +38,7 @@ class ListsController < ApplicationController
  def update
     @list = List.find(params[:id])
      if @list.update(list_params)
-        redirect_to lists_path
+        redirect_to list_path(@list)
     else
         render 'edit'
     end
@@ -51,41 +56,72 @@ class ListsController < ApplicationController
  end
 
 private
+ def extraction_count_or_send_count
+   extraction_count.presence or send_count.presence
+ end
  def list_params
   params.require(:list).permit(
     :company, #会社名
-    :name, #
-    :tel_front,
-    :tel_middle,
-    :tel_back,
-    :fax_front,
-    :fax_middle,
-    :fax_back,
+    :company_kana, #会社名
+    :name, #代表者名
+      :first_name,
+      :last_name,
+      :first_kana,
+      :last_kana,
+    :tel, #電話番号
+      :tel_front,
+      :tel_middle,
+      :tel_back,
+    :fax, #電話番号
+      :fax_front,
+      :fax_middle,
+      :fax_back,
     :postnumber, #郵便番号
-    :prefecture,
-    :city,
-    :town,
-    :town_number,
-    :building,
+    :address, #住所
+      :prefecture,
+      :city,
+      :town,
+      :town_number,
+      :building,
     :mail, #URL
     :url, #URL
-    :usp, #強み
+    :url_2, #URL2
+    :title, #タイトル
+    :industry, #職種
+    :other,
+    :other2,
     :caption, #資本金
     :people, #従業員数
-    :image,
-
     :foundation, #設立日
-    :contact_url, #問い合わせ　
-    :number_of_business, #事業所数 →　n
+    :number_of_business, #事業所数
     :number_of_store, #店舗数
-
-    :explanation, #解説
+    :listing, #上場
+    :settlement, #決算月
 
     :access, #アクセス
     :holiday, #休日
     :business_hour, #営業時間
-    :price #価格
+    :payment, #支払方法
+    :price, #価格
 
-    )
+    :rogo, #ロゴ
+    :image,
+
+    :seo_rank, #SEOランク
+    :google_rank, #googleランク
+    :contact_url, #問い合わせ　
+    :ip_address, #IPアドレス
+
+    :published_site, #掲載サイト
+    :published_now, #今掲載している状況
+    :recruit_now, #求人の状況
+    :explanation, #解説
+
+    :extraction_count,
+    :send_count,
+    :worker_search,
+    :headline,
+    :description
+  )&.merge(worker: current_worker)
   end
 end

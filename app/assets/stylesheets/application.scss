@@ -30,9 +30,9 @@
  */
 @import "bootstrap";
 
- $main_color: #772E13;
- $sub_color: #F27200;
- $asort_color: orange;
+$main_color: #1D9186;
+$sub_color: #142E49;
+$asort_color: #2CE4D3;
 
 body {
   width:100%;
@@ -46,7 +46,7 @@ width:100%;
 background-color:white;
 position: sticky;
 top: 0;
-z-index:10;
+z-index:150;
   .header-image {
     max-width:250px;
     height: 100%;
@@ -81,7 +81,7 @@ z-index:10;
     }
     #dropmenu li{
      position: relative;
-     width: 13.5%;
+     width: 16.5%;
      float: left;
      text-align: center;
     }
@@ -462,7 +462,7 @@ table.company {
       position: relative;
       color: #fff;
       font-weight: bold;
-      font-size: 2.0vw;
+      font-size: 1.0vw;
 
       :after {
          left: 100%;
@@ -528,15 +528,129 @@ table.company {
     font-weight:bold;
  }
 
- .name {width:45%;}
+ .name {width:40%;}
  .tel {width:29%;}
  .address {width:30%;}
 
+ .head-title {
+   padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
+   color: #494949;/*文字色*/
+   background: #f4f4f4;/*背景色*/
+   border-left: solid 5px $main_color;/*左線*/
+   border-bottom: solid 3px #d7d7d7;/*下線*/
+   text-align:left;
+   padding-left:30px;
+   margin:30px auto;
+   width:95%;
+   font-size:30px;
+   font-weight:bold;
+    }
+
+ .list-detail{
+   padding:0 50px;
+   .title {
+    color:black;
+    font-size:1.3em;
+    font-weight:bold;
+    }
+}
 
 .tops-wrapper {
-	margin:50px 10px;
+	margin:50px 0;
 	text-align:center;
+
+  .title-head {
+   color:#333;
+   font-size:2.5em;
+   font-weight:bold;
+   }
+
+	.headline {
+		padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
+		color: #494949;/*文字色*/
+		background: #f4f4f4;/*背景色*/
+		border-left: solid 5px $main_color;/*左線*/
+		border-bottom: solid 3px #d7d7d7;/*下線*/
+		text-align:left;
+		padding-left:30px;
+		margin:30px auto;
+		width:95%;
+		font-size:21px;
+		font-weight:bold;
+	    }
+	p {
+		font-size:14px;
+		text-align:center;
+		padding:0 60px;
+	    }
+
+	bold {
+		font-weight:bold;
+	    }
+
+	span   {
+        color: $main_color;
+        font-size:45px;
+        text-decoration: underline;
+        font-weight:bold;
+        }
+}
+
+.green-wrapper {
+	padding:50px 0;
+	text-align:center;
+  background-color: $main_color;
+
+  .title-head {
+   color:#fff;
+   font-size:2.5em;
+   font-weight:bold;
+   }
+
+	.headline {
+		padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
+		color: #494949;/*文字色*/
+		background: #f4f4f4;/*背景色*/
+		border-left: solid 5px $main_color;/*左線*/
+		border-bottom: solid 3px #d7d7d7;/*下線*/
+		text-align:left;
+		padding-left:30px;
+		margin:30px auto;
+		width:95%;
+		font-size:21px;
+		font-weight:bold;
+	    }
+	p {
+		font-size:14px;
+		text-align:center;
+		padding:0 60px;
+    color:white;
+	    }
+
+	bold {
+		font-weight:bold;
+	    }
+
+	span   {
+        color: $main_color;
+        font-size:45px;
+        text-decoration: underline;
+        font-weight:bold;
+        }
+}
+
+
+.white-wrapper {
+	padding:50px 0;
+	text-align:center;
+  background-color: white;
 	font-weight:bold;
+
+  .title {
+   color:#333;
+   font-size:2.5em;
+   font-weight:bold;
+   }
 
 	.headline {
 		padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
@@ -569,6 +683,8 @@ table.company {
         font-weight:bold;
         }
 }
+
+
 /*hr*/
 .line {
     height:5px;
@@ -887,18 +1003,13 @@ ul.cp_list li:after {
   }
 
 
-.store_index {
-  line-height:3.3vw;
-  font-size:18px;
+.lists_index {
+  font-size:16px;
+  padding:0 80px;
   a {
     text-decoration: none;
     color:black;
   }
-  .store {
-    font-weight:bold;
-    font-size:24px;
-  }
-  .genre {margin:5px;}
 }
 
  /*hr*/

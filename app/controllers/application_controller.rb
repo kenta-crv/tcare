@@ -2,10 +2,9 @@ class ApplicationController < ActionController::Base
   before_action :set_host
 
   # 例外処理
-
-      rescue_from ActiveRecord::RecordNotFound, with: :render_404 unless Rails.env.development?
-      rescue_from ActionController::RoutingError, with: :render_404 unless Rails.env.development?
-      rescue_from Exception, with: :render_500 unless Rails.env.development?
+   rescue_from ActiveRecord::RecordNotFound, with: :render_404 unless Rails.env.development?
+   rescue_from ActionController::RoutingError, with: :render_404 unless Rails.env.development?
+   rescue_from Exception, with: :render_500 unless Rails.env.development?
 
    def set_host
       Rails.application.routes.default_url_options[:host] = request.host_with_port
@@ -37,12 +36,12 @@ class ApplicationController < ActionController::Base
 private
   def after_sign_in_path_for(resource)
     case resource
-    when User
-      "/" #ユーザー登録と相談を兼ねる
     when Admin
       "/" #先々一覧を見れるアナリティクスへ
     when Member
       "/companies/new"
+    when Worker
+      "/lists/new"
     else
       "/"
     end
@@ -51,11 +50,11 @@ private
   #UserとStaffがありログアウト画面に推移
   def after_sign_out_path_for(resource)
     case resource
-    when User, :user, :users
-      "/"
     when Admin, :admin, :admins
       "/"
     when Member, :member, :members
+      "/"
+    when Worker, :worker, :workers
       "/"
     else
        super

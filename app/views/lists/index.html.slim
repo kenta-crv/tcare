@@ -1,63 +1,112 @@
-br
-br
-h2.headline
-
-   | リスト検索
-= search_form_for @q do |f|
- table.company[width="90%"]
-   col[width="20%"]
-   col[width="30%"]
-   col[width="20%"]
-   col[width="30%"]
-   tbody
-     tr
-       th[colspan="4"]
-         | 検索
-     tr
-       th
-         | 事務所名
-       td
-         = f.search_field :company_cont, type: "text", placeholder: "事務所名"
-     tr
-       th
-         | 都道府県
-       td.
-         = f.search_field :prefecture_cont, type: "text", placeholder: "都道府県"
-     tr.center
-       td[colspan="4"]
-         = f.submit '検索', class:"btn btn-danger"
-
 .row
-  br
-  br
-  - @lists.each do |list|
-   .row.store_index
-    .col-xs-1
-    .col-xs-3
-      = link_to list.company, list_path(list), class:"store"
-    .col-xs-3
-      -if list.tel.present?
-       = list.tel
-    .col-xs-4
-      -if list.prefecture.present?
-       = list.prefecture
-       = list.city
-       = list.town
-       = list.chome
-       = list.building
-      - if admin_signed_in?
-       = link_to "編集", edit_list_path(list)
-       = link_to "削除", list_path(list) ,method: :delete,  data: { confirm: '本当に削除しますか？'}
-    .col-xs-1
-    hr.line
-  br
-    br
-    .center
-     = paginate(@lists)
+ .col-xs-12.main
+  .mains-wrapper
+   = image_tag "contact.gif", width:"100%"
 
-- if admin_signed_in?
-  h2.headline  インポート
-  = form_tag import_lists_path, multipart: true do
+  br
+  br
+  .lists_index
+   - @lists.each do |list|
+    .row.center
+     .col-xs-3
+      = link_to list.company, list_path(list, q: params[:q]&.permit!)
+     .col-xs-3
+      = link_to list.industry, list_path(list), class:"genre btn btn-default"
+     .col-xs-6
+      -if list.prefecture.present?
+        = link_to list.prefecture, list_path(list), class:"address"
+        = link_to list.city, list_path(list), class:"address"
+        = link_to list.town, list_path(list), class:"address"
+        = link_to list.town_number, list_path(list), class:"address"
+        = link_to list.building, list_path(list), class:"address"
+      -else
+        = link_to list.address, list_path(list), class:"address"
+      br
+      - if worker_signed_in?
+        = link_to "編集", edit_list_path(list), class:"genre btn btn-success"
+      - if admin_signed_in?
+        = link_to "削除", list_path(list) ,method: :delete,  data: { confirm: '本当に削除しますか？'}, class:"genre btn btn-success"
+    - if worker_signed_in?
+       table.company
+        tr
+          th インポート日
+          th アップデート日
+          th 最終更新者
+          th リスト制作者
+          th メール送信者
+        tr
+          td
+           = link_to list.created_at
+          td
+           = link_to list.updated_at
+          td
+           = link_to list.worker&.user_name
+          td
+           = link_to list.extraction_count
+          td
+           = link_to list.send_count
+    hr
+  = paginate(@lists)
+
+
+ = search_form_for @q do |f|
+  table.company[width="90%"]
+    col[width="20%"]
+    col[width="30%"]
+    col[width="20%"]
+    col[width="30%"]
+    tbody
+      tr
+        th
+          | 検索
+        td
+        th
+          | 分類ワード
+        td
+          = f.search_field :worker_search_cont, type: "text"
+      tr
+        th
+          | リスト製作者
+        td
+          = f.search_field :extraction_count_cont, type: "text"
+        th
+          | メール送信者
+        td
+          = f.search_field :send_count_cont, type: "text"
+      tr
+        th
+          | 抽出未実施
+        td
+          = f.search_field :extraction_count_null, type: 'checkbox', value: 'true'
+        th
+          | メール未実施
+        td
+          = f.search_field :send_count_null, type: 'checkbox', value: 'true'
+      tr
+        th
+          | 最終インポート日時（最初）
+        td
+          = f.date_field :created_at_gteq, class: 'date-picker'
+        th
+          | 最終インポート日時（最後）
+        td
+          = f.date_field :created_at_lteq, class: 'date-picker'
+      tr
+        th
+          | 最終アップデート日時（最初）
+        td
+          = f.date_field :updated_at_gteq, class: 'date-picker'
+        th
+          | 最終アップデート日時（最後）
+        td
+          = f.date_field :updated_at_lteq, class: 'date-picker'
+      tr
+        th.center[colspan="4"]
+          = f.submit '検索',  class: 'btn btn-success'
+
+
+h2.headline  インポート
+= form_tag import_lists_path, multipart: true do
    table.company
       tbody
         tr
@@ -67,8 +116,8 @@ h2.headline
           td
             = file_field_tag :file
           td
-            = submit_tag "インポート",  class: 'btn btn-danger'
+            = submit_tag "インポート",  class: 'btn btn-success'
           td
-            = link_to 'エクスポート', lists_path(format: :csv), class: 'btn btn-danger'
-  br
-  br
+            = link_to 'エクスポート', lists_path(format: :csv), class: 'btn btn-success'
+br
+br

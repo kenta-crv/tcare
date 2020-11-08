@@ -5,12 +5,16 @@ Rails.application.routes.draw do
     sessions: 'admins/sessions'
   }
   resources :admins, only: [:show]
-  #使用者アカウント
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    sessions: 'users/sessions'
+
+  #ワーカーアカウント
+  devise_for :workers, controllers: {
+    registrations: 'workers/registrations',
+    sessions: 'workers/sessions',
+    confirmations: 'workers/confirmations',
+    passwords: 'workers/passwords',
   }
-  resources :users, only: [:show]
+  resources :workers, only: [:show]
+
   #メンバーアカウント
   devise_for :members, controllers: {
     registrations: 'members/registrations',
@@ -18,22 +22,10 @@ Rails.application.routes.draw do
     confirmations: 'members/confirmations',
     passwords: 'members/passwords',
   }
-  #devise_scope :member do
-  #   get 'members/thanks' => 'members/registrations#thanks'
-   #end
-   # devise_scopeで設定しないと、request.env[“devise.mapping”]でroutesの設定がされない
-   #def devise_scope(scope)
-    # constraint = lambda do |request|
-    #   request.env["devise.mapping"] = Devise.mappings[scope]
-    #   true
-     #end
-     #constraints(constraint) do
-    #   yield
-    # end
-   #end
+
   resources :members, only: [:show]
 
-  root to: 'top#index' #トップページ
+  root to: 'lists#index' #トップページ
   #各種LPページ
   get 'guide' => 'top#guide' #企業側LP
   #特集
@@ -46,6 +38,8 @@ Rails.application.routes.draw do
 
   resources :companies do
     collection do
+      get :pay
+      post :get_point
       post :confirm
       post :thanks
     end
@@ -60,15 +54,17 @@ Rails.application.routes.draw do
     collection do
       post :import
     end
+    resources :comments, :recruits, :mailers, :seos
   end
+
+  resources :matters
+
   resources :estimates do
     collection do
       post :confirm
       post :thanks
     end
   end
-  #メッセージ
-  get 'messages/sample' => 'messages#sample'
   #問い合わせフォーム
   get '/contact' => 'contact#index'
   post '/confirm' => 'contact#confirm'

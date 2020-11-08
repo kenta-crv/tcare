@@ -1,2 +1,0 @@
-class Lp < ApplicationRecord
-end

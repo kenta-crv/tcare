@@ -1,4 +1,5 @@
 = form_for @list do |f|
+  h2.headline  基本情報
   table.company
    colgroup
      col width="10%"
@@ -13,28 +14,55 @@
         td = text_field :list, :company
       tr
         td
-          strong.label 必須
+          strong.label.label-blue 任意
+        td.arrow_box
+          | カイシャメイ
+        td = text_field :list, :company_kana
+      tr
+        td
+          strong.label.label-blue 任意
         td.arrow_box
           | 代表者名
         td
-          = text_field :list, :name, class:"name"
+          |（姓）
+          = text_field :list, :first_name, class:"name"
+          |（名）
+          = text_field :list, :last_name, class:"name"
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | ダイヒョウシャ
+        td
+          |（セイ）
+          = text_field :list, :first_kana, class:"name"
+          |（メイ）
+          = text_field :list, :last_kana, class:"name"
       tr
         td
           strong.label 必須
         td.arrow_box
           | 電話番号
         td
-          = text_field :list, :tel
+          = number_field :list, :tel_front, class:"tel"
+          |-
+          = number_field :list, :tel_middle, class:"tel"
+          |-
+          = number_field :list, :tel_back, class:"tel"
       tr
         td
-          strong.label.label-blue 任意
+          strong.label.label.label-blue 任意
         td.arrow_box
           | FAX番号
         td
-          = text_field :list, :fax
+          = number_field :list, :fax_front, class:"tel"
+          |-
+          = number_field :list, :fax_middle, class:"tel"
+          |-
+          = number_field :list, :fax_back, class:"tel"
       tr
         td
-          strong.label 必須
+          strong.label.label-blue 任意
         td.arrow_box
           | 郵便番号
         td = text_field :list, :postnumber
@@ -52,7 +80,7 @@
           |（町）
           = text_field :list, :town, class: "address"
           |（番地）
-          = text_field :list, :chome, class: "address"
+          = text_field :list, :town_number, class: "address"
           br
           |（ビル名）
           = text_field :list, :building, class: "address"
@@ -60,20 +88,20 @@
         td
           strong.label 必須
         td.arrow_box
-          | メールアドレス
-        td = email_field :list, :mail
-      tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | URL
-        td = url_field :list, :url
+          | 業種
+        td = text_field :list, :industry
       tr
         td
           strong.label.label-blue 任意
         td.arrow_box
-          | 強み
-        td = text_field :list, :usp
+          | メールアドレス
+        td = email_field :list, :mail
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | URL（自社サイト）
+        td = url_field :list, :url
       tr
         td
           strong.label.label-blue 任意
@@ -92,6 +120,65 @@
         td
           strong.label.label-blue 任意
         td.arrow_box
+          | 問い合わせURL
+        td = url_field :list, :contact_url
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | 事業所数（本社情報入力の場合必須）
+        td = number_field :list, :number_of_business
+           | 拠点
+
+  h2.headline  補足情報
+  table.company
+   colgroup
+     col width="10%"
+     col width="20%"
+     col width="70%"
+     tbody
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | URL2（求人URL等）
+        td = @list.url_2
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | タイトル
+        td = @list.title
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | other
+        td = @list.other
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | other2
+        td = @list.other2
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | worker検索
+        td = @list.worker_search
+
+  h2.headline  サービス業情報
+  table.company
+   colgroup
+     col width="10%"
+     col width="20%"
+     col width="70%"
+     tbody
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
           | 営業時間
         td = text_field :list, :business_hour
       tr
@@ -104,6 +191,12 @@
         td
           strong.label.label-blue 任意
         td.arrow_box
+          | 支払方法
+        td = text_field :list, :payment
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
           | 料金
         td = text_field :list, :price
       tr
@@ -112,18 +205,20 @@
         td.arrow_box
           | アクセス
         td = text_field :list, :access
+
+  h2.headline  詳細情報
+  table.company
+   colgroup
+     col width="10%"
+     col width="20%"
+     col width="70%"
+     tbody
       tr
         td
-          strong.label 必須
+          strong.label.label-blue 任意
         td.arrow_box
-          | ロゴ画像
-        td = f.file_field :rogo
-      tr
-        td
-          strong.label 必須
-        td.arrow_box
-          | メイン画像
-        td = f.file_field :image
+          | SEOランク
+        td = text_field :list, :seo_rank
       tr
         td
           strong.label.label-blue 任意
@@ -134,22 +229,86 @@
         td
           strong.label.label-blue 任意
         td.arrow_box
-          | 問い合わせURL
-        td = url_field :list, :contact_url
-      tr
-        td
-          strong.label.label-blue 任意
-        td.arrow_box
-          | 事業所数
-        td = number_field :list, :number_of_business
-           | 拠点
-      tr
-        td
-          strong.label.label-blue 任意
-        td.arrow_box
           | 店舗数
         td = number_field :list, :number_of_business
            | 店舗
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | 上場日
+        td = date_field :list, :listing
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | 決算月
+        td = number_field :list, :settlement
+           | 月
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | 掲載サイト
+        td = text_field :list, :published_site
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | 現在の掲載サイト
+        td = text_field :list, :published_now
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | 求人の状況
+        td = text_field :list, :recruit_now
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | IPアドレス
+        td = text_field :list, :ip_address
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | 解説
+        td = text_area :list, :recruit_now
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | タイトル
+        td = text_field :list, :headline
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | 説明
+        td = text_area :list, :description
+
+  h2.headline  カウント（※当情報に記入がないと支払対象外）
+  table.company
+   colgroup
+     col width="10%"
+     col width="20%"
+     col width="70%"
+     tbody
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | リスト製作者向けカウント
+        td
+          = f.select(:extraction_count, List.ExtractionStatus,include_blank: true)
+      tr
+        td
+          strong.label.label-blue 任意
+        td.arrow_box
+          | メール送信者向けカウント
+        td
+          = f.select(:send_count, List.SendStatus,include_blank:true)
 
       tr
         td[colspan="3"] = f.submit '投稿する'

@@ -21,3 +21,30 @@ ja:
         building: ビル名
         mail: メールアドレス
         url: URL
+
+  activerecord:
+    models:
+      list: リスト
+    attributes:
+      company:
+        company: 会社名
+        company_kana: カイシャメイ
+        tel_front: 電話番号
+        tel_middle: 電話番号
+        tel_back: 電話番号
+        fax_front: FAX番号
+        fax_middle: FAX番号
+        fax_back: FAX番号
+        postnumber: 郵便番号
+        prefecture: 都道府県
+        city: 市区町村
+        town: 町名
+        town_number: 丁目以降
+        building: ビル名
+        mail: メールアドレス
+        url: URL
+        industry: 業種
+        caption: 資本金
+        people: 従業員数
+        contact_url: 問い合わせURL
+        extraction_count_or_send_count: リスト製作者向けカウントもしくはメール送信者向けカウント

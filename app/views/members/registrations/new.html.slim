@@ -27,7 +27,7 @@ br
         td
           - if @minimum_password_length
             em
-              | 
+              |
               = @minimum_password_length
               |  文字以上で入力して下さい。
           = f.password_field :password, autocomplete: "off"
@@ -40,6 +40,6 @@ br
           = f.password_field :password_confirmation, autocomplete: "off"
       tr
         td.center[colspan="2"]
-          =f.submit "同意して登録", class:"btn btn-danger"
+          =f.submit "同意して登録", class:"btn btn-success"
   .center
     = render "members/shared/links"

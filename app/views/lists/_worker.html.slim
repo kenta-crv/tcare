@@ -1,0 +1,301 @@
+table.company.center
+  col width="10%"
+  col width="40%"
+  col width="40%"
+  col width="10%"
+  tr
+    th[rowspan="3"]
+      - if @prev_list&.id
+       = link_to "前へ", list_path(id: @prev_list.id, q: params[:q]&.permit!, last_call: params[:last_call]&.permit!), class:"btn btn-success"
+    td
+     | 最終インポート日：
+     = @list.created_at
+    td
+     | 最終アップデート日：
+     = @list.updated_at
+
+    th[rowspan="3"]
+      - if @next_list&.id
+       = link_to "次へ", list_path(id: @next_list.id, q: params[:q]&.permit!, last_call: params[:last_call]&.permit!), class:"prev btn btn-success"
+  tr
+    td
+     | 電話番号更新者：
+     = @list.worker&.user_name
+    td
+     | メール実施者：
+     = @list.send_count
+  tr
+    td
+     = link_to "#{@list.company}をgoogle検索", "http://www.google.de/search?q=#{@list.company}+#{@list.address}", :target => "_blank", class:"genre btn btn-success"
+    td
+     = link_to "編集", edit_list_path(@list), class:"genre btn btn-success"
+
+
+.tops-wrapper
+ br
+ h2.headline
+  | 有料情報
+ table.company
+  colgroup
+    col width="10%"
+    col width="20%"
+    col width="70%"
+    tbody
+     tr
+       td
+         strong.label 必須
+       td.arrow_box
+         | 会社名
+       td = @list.company
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | カイシャメイ
+       td = @list.company_kana
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 代表者名
+       td
+         = @list.first_name
+         = @list.last_name
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | ダイヒョウシャ
+       td
+         = @list.first_kana
+         = @list.last_kana
+     tr
+       td
+         strong.label 必須
+       td.arrow_box
+         | 電話番号
+       td
+         = @list.tel_front
+         |-
+         = @list.tel_middle
+         |-
+         = @list.tel_back
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | FAX番号
+       td
+         = @list.fax_front
+         |-
+         = @list.fax_middle
+         |-
+         = @list.fax_back
+     tr
+       td
+         strong.label 必須
+       td.arrow_box
+         | 郵便番号
+       td = @list.postnumber
+     tr
+       td
+         strong.label 必須
+       td.arrow_box
+         | 住所
+       td
+         = @list.prefecture
+         = @list.city
+         = @list.town
+         = @list.town_number
+         = @list.building
+     tr
+       td
+         strong.label 必須
+       td.arrow_box
+         | メールアドレス
+       td = @list.mail
+     tr
+       td
+         strong.label 必須
+       td.arrow_box
+         | URL
+       td = @list.url
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | URL2
+       td = @list.url_2
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | タイトル
+       td = @list.title
+     tr
+       td
+         strong.label 必須
+       td.arrow_box
+         | 業種
+       td = @list.industry
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | other
+       td = @list.other
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | other2
+       td = @list.other2
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 資本金
+       td = @list.caption
+          | 万円
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 従業員数
+       td = @list.people
+          | 人
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 営業時間
+       td = @list.business_hour
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 休日
+       td = @list.holiday
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 支払方法
+       td = @list.payment
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 料金
+       td = @list.price
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | アクセス
+       td = @list.access
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | ロゴ画像
+       td = @list.rogo
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | メイン画像
+       td = @list.image
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | SEOランク
+       td = @list.seo_rank
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 設立日
+       td = date_field :list, :foundation
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 問い合わせURL
+       td = url_field :list, :contact_url
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 事業所数
+       td = @list.number_of_business
+          | 拠点
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 店舗数
+       td = @list.number_of_business
+          | 店舗
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 上場日
+       td = date_field :list, :listing
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 決算月
+       td = @list.settlement
+          | 月
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 掲載サイト
+       td = @list.published_site
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 現在の掲載サイト
+       td = @list.published_now
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 求人の状況
+       td = @list.recruit_now
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | IPアドレス
+       td = @list.ip_address
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 解説
+       td = @list.recruit_now
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | タイトル
+       td = @list.headline
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | 説明
+       td = @list.description
+     tr
+       td
+         strong.label.label-blue 任意
+       td.arrow_box
+         | worker検索
+       td = @list.worker_search

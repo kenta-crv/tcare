@@ -1,105 +1,648 @@
-- set_meta_tags  title: "#{@list.company}｜業界No1精度の企業リストなら｜TCARE｜#{@list.prefecture}"
+- set_meta_tags  title: "#{@list.company}｜#{@list.industry}｜業界No1精度の企業リストなら｜TCARE｜#{@list.address}"
 - set_meta_tags  keyword:  "#{@list.company} #{@list.tel}"
 - set_meta_tags  description: ''
 br
 br
-.center
-  /= image_tag @list.image.url, width: "50%"
-.tops-wrapper
-br
- h2.headline  基本情報
- table.company.copy-control
-  colgroup
-    col width="20%"
-    col width="30%"
-    col width="20%"
-    col width="30%"
-    tbody
-      tr
-        td.arrow_box
-          | 会社名
-        td = @list.company
-        td.arrow_box
-          | 代表者名
-        td
-            = @list.name
-      tr
-        td.arrow_box
-          | 電話番号
-        td
-             = @list.tel
-              label[for="check-auto-call" style="display:inline-block;margin-left:2em;margin-bottom:0;"]
-                |  <input type="checkbox" id="check-auto-call"
-                = @is_auto_call ? ' checked' : ''
-                |  />自動発信の場合、必ずチェックして下さい。//, checked
-                .call-font
-                = @customer.tel
-                = select_tag(:token, options_for_select(Smartphone.where(delete_flag: false).order(:id).all.collect{ |o| [ o.device_name, o.token ] }), :include_blank => '（選択してください）')
-                |  <button id="button-call" data-number="
-                = @customer.tel
-                | ">発信
-        td.arrow_box
-          | FAX番号
-        td
-             = @list.fax
-        tr
-        td.arrow_box
-          | 郵便番号
-        td = @list.postnumber
-        td.arrow_box
-          | 住所
-        td
-         -if @list.prefecture.present?
-          = @list.prefecture
-          = @list.city
-          = @list.town
-          = @list.chome
-          = @list.building
-         -else
-          = @list.address
-      tr
-        td.arrow_box
-          | メールアドレス
-        td
-            = @list.mail
-        td.arrow_box
-          | URL
-        td = @list.url
-      tr
-        td.arrow_box
-          | 資本金
-        td = @list.caption
-        td.arrow_box
-          | 従業員数
-        td = @list.people
-      tr
-        td.arrow_box
-          | 営業時間
-        td = @list.business_hour
-        td.arrow_box
-          | 休日
-        td = @list.holiday
-      tr
-        td.arrow_box
-          | 料金
-        td = @list.price
-      tr
-        td.arrow_box
-          | アクセス
-        td = @list.access
-      tr
-        td.arrow_box
-          | 事業所数
-        td = @list.number_of_business
-        td.arrow_box
-          | 店舗名
-        td = @list.number_of_store
+- if worker_signed_in?
+ = render "worker"
+- else
+ .tops-wrapper
+  h2.head-title
+    = @list.company
+  br
+  .row.list-detail
+   .col-xs-6.center.image
+    = image_tag "sample.jpg"
+   .col-xs-6
+    /= @list.title
+    /= @list.description
+    .title
+     | 法律をメインとした業務で累計問い合わせ件数10000件突破。問題解決を行うなら、山田弁護士法律事務所。
+    .description
+     | 全国の食通を唸らせ続けてきた、滋賀の名店｢しのはら｣。店主・篠原武将氏は、これまでの名声をすべて捨て、東京進出を決意。2016年10月、｢銀座しのはら｣として再スタートを切った。ビル入り口にある小さな行灯を目印に地下へと降りていくと、凜とした清らかな空間が広がる。店内は、白木のL字カウンターを配したシンプルながらも粋な構成。オールドバカラなど、器にも篠原氏のこだわりが光る。品書きは｢おまかせコース｣のみで、ある日のコースの幕開けはアワビ、ウニなど七種の素材を七つの宝に見立てた｢七宝盛り｣。料理人の挨拶代わりでもある｢先附｣から、滋賀の食材を中心に季節の味覚を愉しめる｢八寸｣まで、毎月変更される献立も通う楽しみのひとつだ。「山玄茶」をはじめ名だたる店で研鑽を積み、その腕と感性を見事に投影させる篠原氏。“絵画のように美しい”と称される一皿は、新天地のここ銀座でも、客人の五感を刺激して止まない。
+
+ .green-wrapper
+  br
+  h2.title-head
+   | 会社概要
+  br
+  .row.list-detail
+   .col-xs-6.center.image
+     table.company.copy-control
+      colgroup
+        col width="20%"
+        col width="30%"
+        col width="20%"
+        col width="30%"
+        tbody
+          tr
+            td.arrow_box
+              | 会社名
+            td = @list.company
+          tr
+            td.arrow_box
+              | 郵便番号
+            td = @list.postnumber
+          tr
+            td.arrow_box
+              | 住所
+            td
+             -if @list.prefecture.present?
+              = @list.prefecture
+              = @list.city
+              = @list.town
+              = @list.town_number
+              = @list.building
+             -else
+              = @list.address
+          tr
+            td.arrow_box
+              | 資本金
+            td = @list.caption
+          tr
+            td.arrow_box
+              | 従業員数
+            td = @list.people
+   .col-xs-6
+     = image_tag "sample2.jpg"
 
 
- h2.headline 企業概要
- table.company
-    tbody
-      tr
-        td = @list.explanation
+ .tops-wrapper
+  br
+  h2.title-head
+   | 有料情報
+  p TCAREは企業の営業活動に必要となる情報を有料にて公開しております。電話番号・代表者名等の有料情報は下記が該当します。
+  .row
+    .col-xs-12
+      table.company.copy-control
+       colgroup
+         col width="20%"
+         col width="30%"
+         col width="20%"
+         col width="30%"
+         tbody
+           tr
+             td.arrow_box
+               | 代表者名
+             td
+               - if worker_signed_in?
+                -if @list.first_name.present?
+                 = @list.first_name
+                 = @list.last_name
+                -else
+                 = @list.name
+               - else
+                 =link_to "#" do
+                  =image_tag "lock.png", height:"24px"
+                  | 会員登録へ
+           tr
+             td.arrow_box
+               | 電話番号
+             td
+               - if worker_signed_in?
+                 -if @list.tel_front.present?
+                  = @list.tel_front
+                  = @list.tel_middle
+                  = @list.tel_back
+                 -else
+                  = @list.tel
+                   label[for="check-auto-call" style="display:inline-block;margin-left:2em;margin-bottom:0;"]
+                     |  <input type="checkbox" id="check-auto-call"
+                     = @is_auto_call ? ' checked' : ''
+                     |  />自動発信の場合、必ずチェックして下さい。//, checked
+                     .call-font
+                     = @list.tel
+                     = select_tag(:token, options_for_select(Smartphone.where(delete_flag: false).order(:id).all.collect{ |o| [ o.device_name, o.token ] }), :include_blank => '（選択してください）')
+                     |  <button id="button-call" data-number="
+                     = @list.tel
+                     | ">発信
+               - else
+                 =link_to "#" do
+                  =image_tag "lock.png", height:"24px"
+                  | 会員登録へ
+           tr
+             td.arrow_box
+               | FAX番号
+             td
+               - if worker_signed_in?
+                 -if @list.tel_front.present?
+                  = @list.fax_front
+                  = @list.fax_middle
+                  = @list.fax_back
+                 -else
+                   = @list.fax
+               - else
+                 =link_to "#" do
+                  =image_tag "lock.png", height:"24px"
+                  | 会員登録へ
+           tr
+             td.arrow_box
+               | メールアドレス
+             td
+               - if worker_signed_in?
+                 = @list.mail
+               - else
+                 =link_to "#" do
+                  =image_tag "lock.png", height:"24px"
+                  | 会員登録へ
+           tr
+             td.arrow_box
+               | URL
+             td
+               - if worker_signed_in?
+                 = @list.url
+               - else
+                 =link_to "#" do
+                  =image_tag "lock.png", height:"24px"
+                  | 会員登録へ
 
-br
+ .green-wrapper
+  br
+  h2.title-head
+   | オーダーメイドプラン
+  br
+  p TCAREでは独自のITプログラミング技術により非常に精度の高い情報を取得出来るプランを用意しております。
+  br
+  .row
+    .col-xs-12
+      table.company.copy-control
+       colgroup
+         col width="15%"
+         col width="25%"
+         col width="60%"
+         tbody
+           tr
+             td.arrow_box
+               | SEOランク
+             td
+               - if worker_signed_in?
+                 = @list.seo_rank
+               - else
+                 =link_to "#" do
+                  =image_tag "lock.png", height:"24px"
+                  | 会員登録へ
+             td
+               | SEO対策やWebコンサルタント様のアプローチ等の参考情報としてご利用頂けます。
+           tr
+             td.arrow_box
+               | 問い合わせURL
+             td
+               - if worker_signed_in?
+                 = @list.contact_url
+               - else
+                 =link_to "#" do
+                  =image_tag "lock.png", height:"24px"
+                  | 会員登録へ
+             td
+              | メルマガと比較し問い合わせフォームは非常に反応率が高いことで知られています。全てのアプローチをしたい企業様におすすめです。
+           tr
+             td.arrow_box
+               | IPアドレス
+             td
+               - if worker_signed_in?
+                 = @list.ip_address
+               - else
+                 =link_to "#" do
+                  =image_tag "lock.png", height:"24px"
+                  | 会員登録へ
+             td
+              | 企業のIPアドレスを取得することで、どの会社が御社のサイトにアクセスを行なったのかを見える化出来、その後の営業アプローチで高い成約率を望めます。
+           tr
+             td.arrow_box
+               | 求人掲載サイト
+             td
+               - if worker_signed_in?
+                 = @list.published_site
+               - else
+                 =link_to "#" do
+                  =image_tag "lock.png", height:"24px"
+                  | 会員登録へ
+             td
+              | 求人をどこの会社で掲載しているかの履歴を見える化します。求人会社や人材紹介・派遣様におすすめです。
+           tr
+             td.arrow_box
+               | 求人掲載中
+             td
+               - if worker_signed_in?
+                 = @list.published_now
+               - else
+                 =link_to "#" do
+                  =image_tag "lock.png", height:"24px"
+                  | 会員登録へ
+             td
+              | 『今』求人に掲載されているかどうかを一眼で確認することが出来ます。どのような人材を募集しているか見える化出来るため、非常に高精度なアプローチが出来ます。
+           tr
+             td.arrow_box
+               | 広告出稿
+             td
+               - if worker_signed_in?
+                 = @list.published_now
+               - else
+                 =link_to "#" do
+                  =image_tag "lock.png", height:"24px"
+                  | 会員登録へ
+             td
+              | 広告出稿履歴を確認することが出来ます。集客サービスを提供したい企業や、おおよその企業が出せる予算感を把握することが出来ます。
+           tr
+             td.arrow_box
+               | 広告現在掲載中
+             td
+               - if worker_signed_in?
+                 = @list.published_now
+               - else
+                 =link_to "#" do
+                  =image_tag "lock.png", height:"24px"
+                  | 会員登録へ
+             td
+              | 現在企業や店舗が広告に掲載しているかどうかを知ることが出来ます。現在の状況や投資予算が把握出来るため、非常に高精度なアプローチが出来ます。
+
+ .tops-wrapper
+  br
+  h2.title-head
+    | オンリーワンのセールスサポート
+  p
+   | TCAREではこの超高精度なリストを活用し、様々なマーケティング代行を繰り広げております。売上アップに向けて御社のリソースが不足しているなら、是非お試し下さい。
+  table.company.copy-control
+   colgroup
+     col width="20%"
+     col width="30%"
+     col width="20%"
+     col width="30%"
+     tbody
+       tr
+         td.arrow_box
+           | テレマーケティング代行
+         td.arrow_box
+           | TCAREリストを活用し、弊社グループ会社のテレアポ代行会社にてコール課金制のアポ代行を行います。
+       tr
+         td.arrow_box
+           | メールマーケティング代行
+         td.arrow_box
+           | メールツールと異なり、問い合わせフォームより送信の代行を行います。問い合わせフォームの送信代行はメールマーケティングの中でも最も効果的と言われています。
+       tr
+         td.arrow_box
+           | Webコンサルティング
+         td.arrow_box
+           | Webサイトを様々な角度から分析し、集客を達成するためのWebサイトへと変貌させます。
+       tr
+         td.arrow_box
+           | コンテンツマーケティング代行
+         td.arrow_box
+           | 会社の将来を見据え、サイトのインデックス数の底上げを行います。即効性は出ませんが、ホームページを会社の資産とすることが出来、未来的に広告をかけずとも問い合わせを集まるようになります。
+       tr
+         td.arrow_box
+           | SNSマーケティング
+         td.arrow_box
+           | Twitter, Facebook, Instagramとニーズに合う媒体におけるSNSの開設・運用代行を行います。
+
+ .green-wrapper
+  br
+  h2.title-head
+   =@list.company
+   |の所在地をマップで確認
+  br
+  p TCAREでは独自のITプログラミング技術により非常に精度の高い情報を取得出来るプランを用意しております。
+  br
+  .row
+    .col-xs-12
+      = image_tag "googlemap.jpg", width:"70%"
+      br
+      br
+      p
+       | 住所：
+       = @list.prefecture
+       = @list.city
+       = @list.town
+       = @list.town_number
+       = @list.building
+
+
+
+ .tops-wrapper
+  br
+  h2.title-head
+    = @list.company
+    | の会社概要
+  table.company.copy-control
+   colgroup
+     col width="20%"
+     col width="30%"
+     col width="20%"
+     col width="30%"
+     tbody
+       tr
+         td.arrow_box
+           | 会社名
+         td = @list.company
+         td.arrow_box
+           | 代表者名
+         td
+           - if worker_signed_in?
+            -if @list.first_name.present?
+             = @list.first_name
+             = @list.last_name
+            -else
+             = @list.name
+           - else
+             =link_to "#" do
+              =image_tag "lock.png", height:"24px"
+              | 会員登録へ
+       tr
+         td.arrow_box
+           | 電話番号
+         td
+           - if worker_signed_in?
+             -if @list.tel_front.present?
+              = @list.tel_front
+              = @list.tel_middle
+              = @list.tel_back
+             -else
+              = @list.tel
+               label[for="check-auto-call" style="display:inline-block;margin-left:2em;margin-bottom:0;"]
+                 |  <input type="checkbox" id="check-auto-call"
+                 = @is_auto_call ? ' checked' : ''
+                 |  />自動発信の場合、必ずチェックして下さい。//, checked
+                 .call-font
+                 = @list.tel
+                 = select_tag(:token, options_for_select(Smartphone.where(delete_flag: false).order(:id).all.collect{ |o| [ o.device_name, o.token ] }), :include_blank => '（選択してください）')
+                 |  <button id="button-call" data-number="
+                 = @list.tel
+                 | ">発信
+           - else
+             =link_to "#" do
+              =image_tag "lock.png", height:"24px"
+              | 会員登録へ
+         td.arrow_box
+           | FAX番号
+         td
+           - if worker_signed_in?
+             -if @list.tel_front.present?
+              = @list.fax_front
+              = @list.fax_middle
+              = @list.fax_back
+             -else
+               = @list.fax
+           - else
+             =link_to "#" do
+              =image_tag "lock.png", height:"24px"
+              | 会員登録へ
+       tr
+         td.arrow_box
+           | 郵便番号
+         td = @list.postnumber
+         td.arrow_box
+           | 住所
+         td
+          -if @list.prefecture.present?
+           = @list.prefecture
+           = @list.city
+           = @list.town
+           = @list.town_number
+           = @list.building
+          -else
+           = @list.address
+       tr
+         td.arrow_box
+           | メールアドレス
+         td
+           - if worker_signed_in?
+             = @list.mail
+           - else
+             =link_to "#" do
+              =image_tag "lock.png", height:"24px"
+              | 会員登録へ
+         td.arrow_box
+           | URL
+         td = @list.url
+         /td.arrow_box
+         /  | URL2
+         /td = @list.url_2
+         /td.arrow_box
+         /  | タイトル
+         /td = @list.title
+       tr
+         td.arrow_box
+           | 資本金
+         td = @list.caption
+         td.arrow_box
+           | 従業員数
+         td = @list.people
+       tr
+         td.arrow_box
+           | 営業時間
+         td = @list.business_hour
+         td.arrow_box
+           | 休日
+         td = @list.holiday
+       tr
+         td.arrow_box
+           | 支払方法
+         td = @list.payment
+         td.arrow_box
+           | 料金
+         td = @list.price
+       tr
+         td.arrow_box
+           | アクセス
+         td = @list.access
+         /td.arrow_box
+         /  | その他
+         /td =@list.other
+         /td.arrow_box
+         /  | その他2
+         /td =@list.other2
+       tr
+         td.arrow_box
+           | 事業所数
+         td = @list.number_of_business
+         td.arrow_box
+           | 店舗名
+         td = @list.number_of_store
+       tr
+         td.arrow_box
+           | 上場
+         td = @list.listing
+         td.arrow_box
+           | 決算月
+         td = @list.settlement
+            | 月
+
+
+  h2.headline 追加情報
+  table.company
+   colgroup
+     col width="20%"
+     col width="30%"
+     col width="20%"
+     col width="30%"
+     tbody
+       tr
+         td.arrow_box
+           | SEOランク
+         td
+           - if worker_signed_in?
+             = @list.seo_rank
+           - else
+             =link_to "#" do
+              =image_tag "lock.png", height:"24px"
+              | 会員登録へ
+         td.arrow_box
+           | 問い合わせURL
+         td
+           - if worker_signed_in?
+             = @list.contact_url
+           - else
+             =link_to "#" do
+              =image_tag "lock.png", height:"24px"
+              | 会員登録へ
+       tr
+         td.arrow_box
+           | IPアドレス
+         td
+           - if worker_signed_in?
+             = @list.ip_address
+           - else
+             =link_to "#" do
+              =image_tag "lock.png", height:"24px"
+              | 会員登録へ
+         td.arrow_box
+           | 掲載サイト
+         td
+           - if worker_signed_in?
+             = @list.published_site
+           - else
+             =link_to "#" do
+              =image_tag "lock.png", height:"24px"
+              | 会員登録へ
+       tr
+         td.arrow_box
+           | 現在掲載中
+         td
+           - if worker_signed_in?
+             = @list.published_now
+           - else
+             =link_to "#" do
+              =image_tag "lock.png", height:"24px"
+              | 会員登録へ
+
+  h2.headline 企業概要
+  table.company
+     tbody
+       tr
+         td = @list.explanation
+
+ br
+
+ = form_for([@list, @list.comments.build], url: list_comments_path(list_id: @list)) do |f|
+  h2.headline コメント
+  -if admin_signed_in?
+   table.company
+    colgroup
+     col width="90%"
+     col width="10%"
+     tbody
+       tr
+         td
+           = f.text_area :body
+         th
+           = f.submit "投稿"
+  br
+  table.company
+    colgroup
+      col width="90%"
+      col width="10%"
+      tbody
+    - if @list.comments.any?
+      tr
+        -if admin_signed_in?
+         th.white.black
+          | 削除
+      tr
+        - @list.comments.each do |comment|
+          td
+            = comment.body
+          -if admin_signed_in?
+           td
+            = link_to '削除', list_comment_path(@list, @list.comments),method: :delete, class: 'command btn btn-primary', data: { confirm: '本当に削除しますか？'}
+  br
+
+ = form_for([@list, @list.seos.build], url: list_seos_path(list_id: @list)) do |f|
+  h2.headline サイトランク
+  -if admin_signed_in?
+   table.company
+    colgroup
+     col width="90%"
+     col width="10%"
+     tbody
+       tr
+         td
+           = f.number_field :rank
+         th
+           = f.submit "投稿"
+  br
+  table.company
+    colgroup
+      col width="90%"
+      col width="10%"
+      tbody
+    - if @list.seos.any?
+      tr
+        -if admin_signed_in?
+         th.white.black
+          | 削除
+      tr
+        - @list.seos.each do |seo|
+          td
+            = seo.rank
+          -if admin_signed_in?
+           td
+            = link_to '削除', list_seo_path(@list, @list.seos),method: :delete, class: 'command btn btn-primary', data: { confirm: '本当に削除しますか？'}
+  br
+
+
+ = form_for([@list, @list.recruits.build], url: list_recruits_path(list_id: @list)) do |f|
+  h2.headline 求人状況
+  -if admin_signed_in?
+   table.company
+    colgroup
+     tbody
+       tr
+         th 掲載状態
+         th 掲載媒体
+         th 職種
+       tr
+         td
+           = f.select(:current,[\
+           ["未掲載","未掲載"],
+           ["掲載中","掲載中"],
+           ])
+         td
+           = f.text_field :media
+         td
+           = f.text_field :occupation
+       tr
+         th
+           = f.submit "投稿"
+  br
+  table.company
+    colgroup
+      col width="90%"
+      col width="10%"
+      tbody
+    - if @list.recruits.any?
+      tr
+        -if admin_signed_in?
+         th.white.black
+          | 削除
+      tr
+        - @list.recruits.each do |recruit|
+          td
+            = recruit.current
+          td
+            = recruit.media
+          td
+            = recruit.occupation
+          -if admin_signed_in?
+           td
+            = link_to '削除', list_recruit_path(@list, @list.recruits),method: :delete, class: 'command btn btn-primary', data: { confirm: '本当に削除しますか？'}
+  br
