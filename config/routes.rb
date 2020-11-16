@@ -54,8 +54,10 @@ Rails.application.routes.draw do
     collection do
       post :import
     end
-    resources :comments, :recruits, :mailers, :seos
+    resources :comments, :recruits, :seos
   end
+
+  resources :mailers
 
   resources :matters
 

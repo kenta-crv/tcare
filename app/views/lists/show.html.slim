@@ -47,7 +47,7 @@ br
             td.arrow_box
               | 住所
             td
-             -if @list.prefecture.present?
+             -if @list&.prefecture.present?
               = @list.prefecture
               = @list.city
               = @list.town
@@ -623,6 +623,36 @@ br
        tr
          th
            = f.submit "投稿"
+  br
+  table.company
+    colgroup
+      col width="90%"
+      col width="10%"
+      tbody
+    - if @list.recruits.any?
+      tr
+        -if admin_signed_in?
+         th.white.black
+          | 削除
+      tr
+        - @list.recruits.each do |recruit|
+          td
+            = recruit.current
+          td
+            = recruit.media
+          td
+            = recruit.occupation
+          -if admin_signed_in?
+           td
+            = link_to '削除', list_recruit_path(@list, @list.recruits),method: :delete, class: 'command btn btn-primary', data: { confirm: '本当に削除しますか？'}
+  br
+
+
+-if member_signed_in?
+  h2.headline メール送信
+  .center
+   = link_to "メールを送信する", new_mailer_path, class:"btn btn-success"
+
   br
   table.company
     colgroup
