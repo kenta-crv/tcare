@@ -31,7 +31,7 @@
 @import "bootstrap";
 
 $main_color: #1D9186;
-$sub_color: #142E49;
+$sub_color: #FA6A10;
 $asort_color: #2CE4D3;
 
 body {
@@ -178,7 +178,7 @@ main {
           font-size:4.0vw;
           font-weight:bold;
           margin-top:30px;
-          color:$asort_color;
+          color:black;
           text-shadow: 2px 2px 2px #fff, -2px 2px 2px #fff, 2px -2px 2px #fff, -2px -2px 2px #fff, 2px 2px 2px #fff, -2px 2px 2px #fff, 2px -2px 2px #fff, -2px -2px 2px #fff;
       }
       .face-2 {
@@ -198,9 +198,9 @@ main {
           line-height:4.0vw;
       }
       .face-price {
-          font-size:3.0vw;
+          font-size:6.0vw;
           font-weight:bold;
-          color:orange;
+          color:$sub_color;
           margin:-10px 0 -25px;
           margin-top:20px;
           margin-bottom:0px;
@@ -213,34 +213,6 @@ main {
  }
 
 
-
- .back-image-top {
-   background-image: url('base3.png');
-   background-size: 100%;
-   background-repeat: no-repeat;
-   vertical-align: middle;
-   padding-bottom:50px;
-   margin-top:-22px;
-}
- .back-image-index {
-   text-align:center;
-   .index-3 {
-       font-size:4.0vw;
-       font-weight:bold;
-       line-height:7vw;
-       color:$asort_color;
-       text-shadow: 2px 2px 2px #fff, -2px 2px 2px #fff, 2px -2px 2px #fff, -2px -2px 2px #fff, 2px 2px 2px #fff, -2px 2px 2px #fff, 2px -2px 2px #fff, -2px -2px 2px #fff;
-   }
-   /*イエローライン*/
-   .push {
-       text-align:center;
-       font-size:4.5vw;
-       color:#F27200;
-       font-weight:bold;
-       width:100%;
-       text-shadow: 3px 3px 3px #fff, -3px 3px 3px #fff, 3px -3px 3px #fff, -3px -3px 3px #fff, 3px 3px 3px #fff, -3px 3px 3px #fff, 3px -3px 3px #fff, -3px -3px 3px #fff;
-   }
-  }
 
 
 
@@ -268,20 +240,19 @@ main {
   margin:0 auto;
 }
 
+/*イエローライン*/
 .push {
     text-align:center;
-    font-size:6.0vw;
-    margin:0px;
+    font-size:5.0vw;
     color:orange;
-    line-height:5.0vw;
+    line-height:7.0vw;
     font-weight:bold;
     width:100%;
-    text-shadow: 3px 3px 3px yellow, -3px 3px 3px #fff, 3px -3px 3px #fff, -3px -3px 3px #fff, 3px 3px 3px #fff, -3px 3px 3px #fff, 3px -3px 3px #fff, -3px -3px 3px #fff;
+    text-shadow: 2px 2px 2px #000;
 }
 .under {
      background: linear-gradient(transparent 60%, #FFFF66 60%);
 }
-
 
 
 .surprise {
@@ -355,7 +326,6 @@ p {
 .price {
   color:red;
 }
-
 
 
 ul {
@@ -582,8 +552,7 @@ table.company {
 		font-size:14px;
 		text-align:center;
 		padding:0 60px;
-	    }
-
+  }
 	bold {
 		font-weight:bold;
 	    }
@@ -596,93 +565,6 @@ table.company {
         }
 }
 
-.green-wrapper {
-	padding:50px 0;
-	text-align:center;
-  background-color: $main_color;
-
-  .title-head {
-   color:#fff;
-   font-size:2.5em;
-   font-weight:bold;
-   }
-
-	.headline {
-		padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
-		color: #494949;/*文字色*/
-		background: #f4f4f4;/*背景色*/
-		border-left: solid 5px $main_color;/*左線*/
-		border-bottom: solid 3px #d7d7d7;/*下線*/
-		text-align:left;
-		padding-left:30px;
-		margin:30px auto;
-		width:95%;
-		font-size:21px;
-		font-weight:bold;
-	    }
-	p {
-		font-size:14px;
-		text-align:center;
-		padding:0 60px;
-    color:white;
-	    }
-
-	bold {
-		font-weight:bold;
-	    }
-
-	span   {
-        color: $main_color;
-        font-size:45px;
-        text-decoration: underline;
-        font-weight:bold;
-        }
-}
-
-
-.white-wrapper {
-	padding:50px 0;
-	text-align:center;
-  background-color: white;
-	font-weight:bold;
-
-  .title {
-   color:#333;
-   font-size:2.5em;
-   font-weight:bold;
-   }
-
-	.headline {
-		padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
-		color: #494949;/*文字色*/
-		background: #f4f4f4;/*背景色*/
-		border-left: solid 5px $main_color;/*左線*/
-		border-bottom: solid 3px #d7d7d7;/*下線*/
-		text-align:left;
-		padding-left:30px;
-		margin:30px auto;
-		width:95%;
-		font-size:21px;
-		font-weight:bold;
-	    }
-	p {
-		line-height:2.5;
-		font-size:18px;
-		text-align:left;
-		margin:50px;
-	    }
-
-	bold {
-		font-weight:bold;
-	    }
-
-	span   {
-        color: $main_color;
-        font-size:45px;
-        text-decoration: underline;
-        font-weight:bold;
-        }
-}
 
 
 /*hr*/
@@ -707,85 +589,6 @@ table.company {
   font-weight:bold;
   font-size:3rem;
   color:black;
-}
-
-
-
-#dropmenu{
- list-style-type: none;
- width: 100%;
- height: 40px;
- margin: 0 auto;
- background: $main_color;
-}
-#dropmenu li{
- position: relative;
- width: 16%;
- float: left;
- margin: 0;
- padding: 0;
- text-align: center;
-}
-#dropmenu li a{
- display: block;
- margin: 0;
- padding: 10px 0 15px;
- color: #fff;
- font-size: 100%;
- text-shadow: 1px 1px 1px #000;
- line-height: 1;
- text-decoration: none;
-}
-#dropmenu li ul{
- list-style: none;
- position: absolute;
- top: 100%;
- left: 0;
- margin: 0;
- padding: 0;
- border-radius: 0 0 3px 3px;
-}
-#dropmenu li:last-child ul{
- left: -100%;
- width: 100%
-}
-#dropmenu li ul li{
- overflow: hidden;
- width: 300%;
- height: 0;
- color: #fff;
- -moz-transition: .2s;
- -webkit-transition: .2s;
- -o-transition: .2s;
- -ms-transition: .2s;
- transition: .2s;
-}
-#dropmenu li ul li a{
- padding: 13px 15px;
- background: $main_color;
- text-align: left;
- font-size: 12px;
- font-weight: normal;
-}
-#dropmenu li:hover > a{
-background-color:$sub_color;
- color: #fff;
-}
-
-#dropmenu li:hover ul li{
- overflow: visible;
- height: 38px;
- border-top: 1px solid #fff;
- border-bottom: 1px solid #fff;
-}
-#dropmenu li:hover ul li:first-child{
- border-top: 0;
-}
-#dropmenu li:hover ul li:last-child{
- border-bottom: 0;
-}
-#dropmenu li:hover ul li:last-child a{
- border-radius: 0 0 3px 3px;
 }
 
 
@@ -922,15 +725,35 @@ background-color:$sub_color;
 
 
 
-.heading {
-  padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
-  color: #494949;/*文字色*/
-  background: #f4f4f4;/*背景色*/
-  border-left: solid 5px $main_color;/*左線*/
-  border-bottom: solid 3px #d7d7d7;/*下線*/
-  font-size:20px;
-  margin:0 5px;
-  font-weight:bold;
+
+                                               /*  Top Wrapper  */
+.top-wrapper {
+  padding-bottom: 70px;
+  position:relative;
+  text-align:center;
+                                    /*タイトル*/
+       .heading {
+           text-align:center;
+           color: #666;
+            }
+        h2 {
+            font-size:3vw;
+            font-weight:bold;
+            }
+        p {
+            font-size:2vw;
+            }
+        strong {
+            color: $main_color;
+            font-size:4.0rem;
+            text-decoration: underline;
+            font-weight:bold;
+        }
+        h6 {
+            line-height:2.0em;
+            font-size:1.5vw;
+            margin:0 70px;
+        }
 }
 
 
@@ -1022,71 +845,6 @@ ul.cp_list li:after {
      background-image: -o-linear-gradient(left, #eee, $main_color, #eee);
      width:90%;
  }
-
-
-
- /*  Top Wrapper  */
-.top-wrapper {
-  padding-bottom: 70px;
-  position:relative;
-    /*タイトル*/
-    .heading {
-      text-align:center;
-      color: #666;
-    }
-    h2.head {
-      position: relative;
-      background:$main_color;
-      line-height: 1.4;
-      padding: 0.25em 0.5em;
-      margin: 2em 0 0.5em;
-      border-radius: 0 5px 5px 5px;
-      color:white;
-      font-weight:bold;
-      font-size:18px;
-    }
-
-    h2.head:after {
-      /*タブ*/
-      position: absolute;
-      font-family: "Font Awesome 5 Free",'Quicksand','Avenir','Arial',sans-serif;
-      content: '\f00c Check';
-      background: $asort_color;
-      color: #fff;
-      left: 0px;
-      bottom: 100%;
-      border-radius: 5px 5px 0 0;
-      padding: 3px 7px 1px;
-      font-size: 0.7em;
-      line-height: 1;
-      letter-spacing: 0.05em
-    }
-
-
-  .box {
-      padding: 0.5em 1em;
-      margin: 2em 0;
-      font-weight: bold;
-      color: #6091d3;/*文字色*/
-      background: #FFF;
-      border: solid 3px #6091d3;/*線*/
-      border-radius: 10px;/*角の丸み*/
-  }
-  .box p {
-      margin: 0;
-      padding: 0;
-  }
-  .text {
-    padding-top:8px;
-    font-size:15px;
-    color:#333;
-  }
-}
-
-.harf {
-  width:50%;
-}
-
 
 
 nav.globalMenuSp {
@@ -1295,4 +1053,89 @@ nav.globalMenuSp.active {
 }
 .field_with_errors {
   @extend .has-error;
+}
+
+
+ul {
+    padding: 0;
+    width: 90%;
+}
+li {
+    list-style-type: none;
+}
+dd {
+    margin-left: 0;
+}
+
+.flow > li {
+    position: relative;
+}
+.flow > li:not(:last-child) {
+    margin-bottom: 40px;
+}
+.flow > li:not(:first-child)::before {
+    content: "";
+    height: 60px;
+    display: block;
+    border-left: 4px dotted $main_color;
+    position: absolute;
+    top: -40px;
+    left: -webkit-calc(10% + 30px - 2px);
+    left: calc(10% + 30px - 2px);
+    z-index: 10;
+}
+.flow > li dl {
+    width: 100%;
+    padding: 20px 30px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border: 2px solid $main_color;
+    border-radius: 10px;
+    position: relative;
+}
+.flow > li:not(:last-child) dl::before,
+.flow > li:not(:last-child) dl::after {
+    content: "";
+    border: solid transparent;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.flow > li:not(:last-child) dl::before {
+    border-width: 22px;
+    border-top-color: $main_color;
+}
+.flow > li:not(:last-child) dl::after {
+    border-width: 20px;
+    border-top-color: #fff;
+}
+.flow > li dl dt {
+    font-size: 20px;
+    font-weight: 600;
+    color: $main_color;
+    -ms-flex-preferred-size: 20%;
+    flex-basis: 25%;
+    margin-right: 2vw;
+    text-align: center;
+}
+.flow > li dl dt .icon {
+    font-size: 12px;
+    color: #fff;
+    background: $asort_color;
+    background: -moz-linear-gradient(left, $asort_color 0%, $main_color 100%);
+    background: -webkit-linear-gradient(left, $asort_color 0%,$main_color 100%);
+    background: linear-gradient(to right, $asort_color 0%,$main_color 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b90db', endColorstr='#66d5e9',GradientType=1 );
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    display: block;
+    border-radius: 20px;
+    position: relative;
+    z-index: 9;
 }

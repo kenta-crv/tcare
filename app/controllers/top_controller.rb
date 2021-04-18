@@ -1,5 +1,5 @@
 class TopController < ApplicationController
-  def index
+  def lp
   end
 
   def guide

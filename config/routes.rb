@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   get 'special' => 'top#special'
   get 'faq' => 'top#faq'
   get 'co' => 'top#co'
+  get 'lp' => 'top#lp'
 
   #企業側アカウント
   get 'companies/pay' => 'companies#pay'
